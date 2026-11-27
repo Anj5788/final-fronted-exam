@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Travel Gallery</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f3f5ff;
+    text-align: center;
+    padding: 20px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 650px;
+    margin: auto;
+}
+
+.tile {
+    height: 150px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.tile:hover {
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.big-tile {
+    width: 60%;
+    height: 350px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Travel Gallery</h2>
+
+<div class="gallery">
+
+<div class="tile" style="background:linear-gradient(120deg,#38c5a4,#2164a5)" onclick="openBox(this)">Mountain</div>
+
+<div class="tile" style="background:linear-gradient(120deg,#25c6d8,#5578e8)" onclick="openBox(this)">Beach</div>
+
+<div class="tile" style="background:linear-gradient(120deg,#55b52d,#a4df60)" onclick="openBox(this)">Forest</div>
+
+<div class="tile" style="background:linear-gradient(120deg,#ff922e,#ffce00)" onclick="openBox(this)">Desert</div>
+
+<div class="tile" style="background:linear-gradient(120deg,#593a82,#52628c)" onclick="openBox(this)">City</div>
+
+<div class="tile" style="background:linear-gradient(120deg,#08bde8,#0874ed)" onclick="openBox(this)">Lake</div>
+
+</div>
+
+<div id="lightbox" class="lightbox hidden">
+    <span class="close" onclick="closeBox()">×</span>
+    <div id="bigTile" class="big-tile"></div>
+</div>
+
+<script>
+
+let box = document.getElementById("lightbox");
+let big = document.getElementById("bigTile");
+
+function openBox(tile) {
+    big.innerText = tile.innerText;
+    big.style.background = tile.style.background;
+    box.classList.remove("hidden");
+}
+
+function closeBox() {
+    box.classList.add("hidden");
+}
+
+box.addEventListener("click", function(e) {
+    if(e.target === box) {
+        closeBox();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if(e.key === "Escape") {
+        closeBox();
+    }
+});
+
+</script>
+
+</body>
+</html>
